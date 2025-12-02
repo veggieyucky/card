@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Gift</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            animation: bounceIn 1s ease;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .header h1 {
+            font-size: 3em;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .collage {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feet-card {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: rotate(0deg);
+            transition: transform 0.3s ease;
+            animation: slideIn 0.6s ease backwards;
+        }
+
+        .feet-card:nth-child(1) { animation-delay: 0.1s; transform: rotate(-3deg); }
+        .feet-card:nth-child(2) { animation-delay: 0.2s; transform: rotate(2deg); }
+        .feet-card:nth-child(3) { animation-delay: 0.3s; transform: rotate(-2deg); }
+        .feet-card:nth-child(4) { animation-delay: 0.4s; transform: rotate(3deg); }
+        .feet-card:nth-child(5) { animation-delay: 0.5s; transform: rotate(-1deg); }
+        .feet-card:nth-child(6) { animation-delay: 0.6s; transform: rotate(2deg); }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px) rotate(0deg);
+            }
+        }
+
+        .feet-card:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .feet-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .caption {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .final-message {
+            text-align: center;
+            margin-top: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: fadeIn 2s ease 1.5s backwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+        }
+
+        .final-message h2 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 2em;
+        }
+
+        .final-message p {
+            font-size: 1.2em;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .header p {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>A special gift for a special person</h1>
+        <p>I hope this sweeps you off your feet...</p>
+    </div>
+
+    <div class="collage">
+        <div class="feet-card">
+            <img src="croc.jpg" alt="Feet 1">
+            <div class="caption">you croc my world</div>
+        </div>
+
+        <div class="feet-card">
+            <img src="feet4.jpg" alt="Feet 2">
+            <div class="caption">toetally in love with you</div>
+        </div>
+
+        <div class="feet-card">
+            <img src="feet1.jpg" alt="Feet 3">
+            <div class="caption">arigatoes for being the best</div>
+        </div>
+
+        <div class="feet-card">
+            <img src="feet2.jpg" alt="Feet 4">
+            <div class="caption">ur toeriffic 👣</div>
+        </div>
+
+        <div class="feet-card">
+            <img src="feetLOL.jpg" alt="Feet 5">
+            <div class="caption">I'm heel over heels for you</div>
+        </div>
+
+        <div class="feet-card">
+            <img src="cute.jpg" alt="Feet 6">
+            <div class="caption">okay im out of feet puns and photos ily</div>
+        </div>
+    </div>
+
+    <div class="final-message">
+        <h2>okay but seriously</h2>
+        <p>
+            I hope the shoes fit perfectly and you love them ❤️<br><br>
+            We are sole mates haha get it lol
+        </p>
+    </div>
+</body>
+</html>
