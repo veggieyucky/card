@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday! 🎁</title>
+    <title>Happy Birthday</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap');
 
@@ -493,18 +493,18 @@
         <div class="birthday-title">
             <h1>
                 Happy Birthday!
-                <span class="age">Level 32 Unlocked 🎮</span>
+                <span class="age">Holy Moly level 32 unlocked</span>
             </h1>
-            <p>Time to play a birthday game...</p>
+            <p>Time to play a game...</p>
         </div>
-        <button class="start-button" onclick="startGame()">Let's Play!</button>
+        <button class="start-button" onclick="startGame()">Click me again</button>
     </div>
 
     <!-- Game Screen -->
     <div class="game-screen" id="gameScreen">
         <div class="game-header">
-            <h2>🎪 Birthday Carnival! 🎪</h2>
-            <p>Pick 3 gift boxes to reveal your prizes!</p>
+            <h2>Birthday Gift!</h2>
+            <p>Pick 3 gift boxes to reveal your prizes! Choose wisely!</p>
         </div>
         
         <div class="tokens-container">
@@ -524,7 +524,7 @@
             <div class="prize-emoji" id="prizeEmoji">🎁</div>
             <h3>You Won:</h3>
             <div class="prize-text" id="prizeText"></div>
-            <button class="continue-button" onclick="closePrize()">Nice!</button>
+            <button class="continue-button" onclick="closePrize()">Yay!</button>
         </div>
     </div>
 
@@ -532,7 +532,7 @@
     <div class="results-screen" id="resultsScreen">
         <div class="results-container">
             <div class="results-header">
-                <h2>Game Over! 🎉</h2>
+                <h2>Game Over</h2>
             </div>
 
             <div class="your-prizes">
@@ -541,27 +541,27 @@
             </div>
 
             <div class="missed-section">
-                <h4>What You Could've Won... 😅</h4>
+                <h4>What You Could've Won: </h4>
                 <div class="missed-grid" id="missedPrizes"></div>
             </div>
 
             <div class="final-message">
-                <h3>Okay but seriously...</h3>
+                <h3>LOL ANYWAYS...</h3>
                 <p>
-                    Happy 32nd birthday to my favorite person in the entire world! 
-                    I know the prizes were rigged (lol sorry), but you're still the real winner here.
+                    Happy birthday to my favorite person in the entire world.
+    I know the prizes were rigged (sorry), but I promise I’ll make it up to you in other ways &lt;3.
                 </p>
                 <p>
-                    Thank you for being you – for making me laugh every single day, 
-                    for all the late-night gaming sessions, for being my player 2 in this crazy game called life.
+                    Thank you for making me laugh every single day, for sticking with me through everything,
+    and for being my person.
                 </p>
                 <p>
-                    Here's to another year of legendary moments, epic victories, 
-                    and respawning together no matter what. GG, birthday boy! 🎮❤️
+                    Here’s to anotha year of getting older and hotter ;)
+    Life is honestly so much better with you baby, and I hope to be around for many many MANY more birthdays.
                 </p>
                 <div class="signature">
                     Love you endlessly,<br>
-                    Your Biggest Fan 💕
+                    Purpleshorts 💜
                 </div>
                 <a href="index.html" class="home-button">Back to Home</a>
             </div>
@@ -571,25 +571,25 @@
     <script>
         // Prize pools
         const goodPrizes = [
-            { text: "$5 Venmo Transfer", emoji: "💵" },
-            { text: "Anything off the McDonalds $1-2-3 Menu", emoji: "🍔" },
-            { text: "Free Hug Coupon", emoji: "🤗" }
+            { text: "One free high five coupon", emoji: "🤗" },
+            { text: "$5 Venmo Transfer and 69 Coppers", emoji: "💵" },
+            { text: "Anything off the Mickey D's $123 Menu", emoji: "🍔" },
         ];
 
         const amazingPrizes = [
-            "₿100,000 Bitcoin",
-            "RTX 5090 Ti Graphics Card",
-            "100,000g in World of Warcraft",
-            "Private Island in the Bahamas",
-            "Unlimited Taco Bell for Life",
-            "Tesla Cybertruck",
-            "Mythic Raid Carry Package",
-            "Gaming PC Worth $10,000",
-            "2-Story Luxury Guest House Near Beach",
-            "Lobster and Beef Wellington Every Day",
-            "Lifetime Supply of Energy Drinks",
-            "Professional Elden Ring Coach"
-        ];
+  "1,000,000g in World of Warcraft",
+  "Calories Only Count When You Want Them To",
+  "Your Back Never Itches Again",
+  "No Traffic on I-5 When You're There",
+  "Pet Cockroach (Released Into Your Room)",
+  "Free Fried Chicken Whenever But It’s Always Slightly Cold",
+  "Beachfront Mansion So Big It Has Its Own Zip Code",
+  "Always BIS Gear on Wendyschilis",
+  "Phone Charger That Only Works at Certain Angles",
+  "Lifetime Supply of Energy Drinks",
+  "8 Bajillion Dollars",
+  "All Your SRs Are Guaranteed Drops"
+]
 
         let tokensLeft = 3;
         let selectedPrizes = [];
