@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You</title>
+    <title>Hehe funny</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -12,115 +14,299 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #faeee7;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Navigation */
-        nav {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            text-align: center;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2em;
-            padding: 10px 20px;
-            margin: 0 10px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        nav a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        nav a.active {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Main Content */
-        .container {
-            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px 20px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .welcome-message {
-            background: white;
-            padding: 60px 40px;
-            border-radius: 20px;
-            max-width: 600px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            text-align: center;
-            animation: fadeIn 1.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .welcome-message h1 {
-            color: #764ba2;
+        /* Floating decorations */
+        .floating-decoration {
+            position: fixed;
             font-size: 2.5em;
+            animation: float-diagonal 12s ease-in-out infinite;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        @keyframes float-diagonal {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(50px, -50px) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, -100px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-50px, -50px) rotate(270deg);
+            }
+        }
+
+        /* Main countdown container */
+        .countdown-container {
+            background: #fffffe;
+            padding: 60px 50px;
+            border-radius: 30px;
+            border: 4px solid #33272a;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 8px 8px 0px #ffc6c7;
+            text-align: center;
+            animation: popIn 1s ease;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9) rotate(-2deg);
+            }
+            50% {
+                transform: scale(1.02) rotate(1deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .lock-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 2.5em;
+            color: #33272a;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .teaser {
+            font-size: 1.3em;
+            color: #594a4e;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .countdown-timer {
+            background: #faeee7;
+            padding: 30px;
+            border-radius: 20px;
+            border: 3px solid #33272a;
             margin-bottom: 30px;
         }
 
-        .welcome-message p {
-            color: #333;
-            font-size: 1.3em;
-            line-height: 1.8;
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .timer-unit {
+            background: #fffffe;
+            padding: 20px 10px;
+            border-radius: 15px;
+            border: 2px solid #33272a;
+        }
+
+        .timer-number {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 2.5em;
+            color: #ff8ba7;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .timer-label {
+            font-size: 0.9em;
+            color: #594a4e;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .unlock-date {
+            font-size: 1.1em;
+            color: #33272a;
+            font-weight: 600;
+        }
+
+        .hint {
+            margin-top: 30px;
+            font-size: 0.95em;
+            color: #594a4e;
+            opacity: 0.7;
+        }
+
+        /* Secret bypass button - hidden */
+        .secret-bypass {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            z-index: 1000;
+        }
+
+        .secret-bypass:hover {
+            opacity: 0.1;
         }
 
         @media (max-width: 768px) {
-            .welcome-message {
+            .countdown-container {
                 padding: 40px 30px;
+                box-shadow: 5px 5px 0px #ffc6c7;
             }
-            .welcome-message h1 {
+
+            h1 {
                 font-size: 2em;
             }
-            .welcome-message p {
-                font-size: 1.1em;
+
+            .lock-icon {
+                font-size: 3.5em;
             }
-            nav a {
-                font-size: 1em;
-                padding: 8px 15px;
-                margin: 5px;
+
+            .timer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .timer-number {
+                font-size: 2em;
+            }
+
+            .timer-label {
+                font-size: 0.8em;
             }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="archive.html">Archive</a>
-    </nav>
+    <!-- Floating decorations -->
+    <div class="floating-decoration" style="top: 10%; left: 10%; animation-delay: 0s;">🎁</div>
+    <div class="floating-decoration" style="top: 20%; right: 15%; animation-delay: 2s;">🎉</div>
+    <div class="floating-decoration" style="bottom: 15%; left: 20%; animation-delay: 4s;">🎈</div>
+    <div class="floating-decoration" style="bottom: 25%; right: 10%; animation-delay: 6s;">✨</div>
+    <div class="floating-decoration" style="top: 50%; left: 5%; animation-delay: 8s;">🎂</div>
+    <div class="floating-decoration" style="top: 60%; right: 5%; animation-delay: 10s;">🎊</div>
 
-    <div class="container">
-        <div class="welcome-message">
-            <h1>Hi Bibby</h1>
-            <p>
-                I wanted to give you this NFC card so you have an instant link to this website. 
-                This will be updating occasionally and it'll keep track of what I have :3
-            </p>
+    <div class="countdown-container">
+        <div class="lock-icon">🔒</div>
+        <h1>Big things happening soon...</h1>
+        <p class="teaser">
+            A very silly bday thing LOL 
+        </p>
+
+        <div class="countdown-timer">
+            <div class="timer-grid">
+                <div class="timer-unit">
+                    <span class="timer-number" id="days">00</span>
+                    <span class="timer-label">Days</span>
+                </div>
+                <div class="timer-unit">
+                    <span class="timer-number" id="hours">00</span>
+                    <span class="timer-label">Hours</span>
+                </div>
+                <div class="timer-unit">
+                    <span class="timer-number" id="minutes">00</span>
+                    <span class="timer-label">Minutes</span>
+                </div>
+                <div class="timer-unit">
+                    <span class="timer-number" id="seconds">00</span>
+                    <span class="timer-label">Seconds</span>
+                </div>
+            </div>
+            <div class="unlock-date">Unlocks: February 5, 2026</div>
         </div>
+
+        <p class="hint">Check back soon :D</p>
     </div>
+
+    <!-- Secret bypass button (invisible, bottom right corner) -->
+    <button class="secret-bypass" onclick="bypassCountdown()" title="Secret bypass"></button>
+
+    <script>
+        // Target date: February 5, 2026, 12:00 AM PST
+        const targetDate = new Date('2026-02-05T00:00:00-08:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            // Check if countdown is over
+            if (distance < 0) {
+                unlockExperience();
+                return;
+            }
+
+            // Calculate time units
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Update display
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        function unlockExperience() {
+            // Redirect to birthday homepage
+            window.location.href = 'index_birthday.html';
+        }
+
+        function bypassCountdown() {
+            // Secret bypass function - redirects immediately
+            if (confirm('🔓 Secret bypass activated! Go to birthday page?')) {
+                unlockExperience();
+            }
+        }
+
+        // Check for bypass URL parameter (alternative secret method)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('unlock') === 'true') {
+            unlockExperience();
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Also check every minute in case browser was asleep
+        setInterval(() => {
+            const now = new Date().getTime();
+            if (targetDate - now < 0) {
+                unlockExperience();
+            }
+        }, 60000);
+    </script>
 </body>
 </html>

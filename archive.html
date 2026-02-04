@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Memory Archive 💕</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -12,15 +14,15 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #faeee7;
             min-height: 100vh;
         }
 
         /* Navigation */
         nav {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: #fffffe;
+            border-bottom: 3px solid #33272a;
             padding: 20px;
             text-align: center;
             position: sticky;
@@ -29,10 +31,11 @@
         }
 
         nav a {
-            color: white;
+            color: #33272a;
             text-decoration: none;
-            font-size: 1.2em;
-            padding: 10px 20px;
+            font-size: 1.1em;
+            font-weight: 600;
+            padding: 10px 25px;
             margin: 0 10px;
             border-radius: 25px;
             transition: all 0.3s ease;
@@ -40,52 +43,55 @@
         }
 
         nav a:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: #ffc6c7;
             transform: translateY(-2px);
         }
 
         nav a.active {
-            background: rgba(255, 255, 255, 0.3);
+            background: #ff8ba7;
+            color: #33272a;
         }
 
         /* Archive Container */
         .container {
-            padding: 40px 20px;
+            padding: 60px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .archive-header {
             text-align: center;
-            color: white;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             animation: fadeIn 1s ease;
         }
 
         .archive-header h1 {
-            font-size: 3em;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 3.5em;
+            color: #33272a;
+            margin-bottom: 15px;
         }
 
         .archive-header p {
-            font-size: 1.3em;
-            opacity: 0.9;
+            font-size: 1.4em;
+            color: #594a4e;
         }
 
         /* Archive Grid */
         .archive-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
 
         .archive-card {
-            background: white;
-            border-radius: 20px;
+            background: #fffffe;
+            border-radius: 25px;
+            border: 3px solid #33272a;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 6px 6px 0px #ffc6c7;
+            transition: all 0.3s ease;
             cursor: pointer;
             animation: popIn 0.6s ease backwards;
         }
@@ -98,7 +104,7 @@
         @keyframes popIn {
             from {
                 opacity: 0;
-                transform: scale(0.8);
+                transform: scale(0.9);
             }
         }
 
@@ -107,71 +113,81 @@
         }
 
         .archive-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0px #ff8ba7;
         }
 
         .archive-card img {
             width: 100%;
-            height: 250px;
+            height: 220px;
             object-fit: cover;
+            border-bottom: 3px solid #33272a;
         }
 
         .archive-card-content {
-            padding: 20px;
+            padding: 30px;
         }
 
         .archive-card-content h3 {
-            color: #764ba2;
-            font-size: 1.5em;
-            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            color: #33272a;
+            font-size: 1.6em;
+            margin-bottom: 12px;
         }
 
         .archive-card-content .date {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 10px;
+            color: #ff8ba7;
+            font-size: 0.95em;
+            font-weight: 600;
+            margin-bottom: 12px;
         }
 
         .archive-card-content p {
-            color: #333;
+            color: #594a4e;
             line-height: 1.6;
+            font-size: 1.05em;
         }
 
         .view-card-btn {
             display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background: #764ba2;
-            color: white;
+            margin-top: 20px;
+            padding: 12px 28px;
+            background: #ff8ba7;
+            color: #33272a;
             text-decoration: none;
             border-radius: 25px;
+            border: 2px solid #33272a;
+            font-weight: 700;
             transition: all 0.3s ease;
         }
 
         .view-card-btn:hover {
-            background: #667eea;
-            transform: translateX(5px);
+            background: #ffc6c7;
+            transform: translateX(3px);
         }
 
         .no-cards {
             text-align: center;
-            color: white;
+            color: #594a4e;
             font-size: 1.3em;
             padding: 60px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
+            background: #fffffe;
+            border: 3px solid #33272a;
+            border-radius: 25px;
         }
 
         @media (max-width: 768px) {
             .archive-header h1 {
-                font-size: 2em;
+                font-size: 2.5em;
             }
             nav a {
                 font-size: 1em;
                 padding: 8px 15px;
                 margin: 5px;
+            }
+            .archive-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -189,22 +205,33 @@
         </div>
 
         <div class="archive-grid">
+            <!-- Birthday 2026 Card -->
+            <div class="archive-card">
+                <div class="archive-card-content">
+                    <h3>🎂 Birthday Carnival 2026</h3>
+                    <div class="date">February 2026</div>
+                    <p>A rigged carnival game where you definitely won the best prizes (or did you?). Featuring gamer jokes and questionable gift options.</p>
+                    <a href="birthday2026_carnival.html" class="view-card-btn">View Card →</a>
+                </div>
+            </div>
+
             <!-- Christmas 2025 Card -->
             <div class="archive-card">
                 <!--<img src="https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=500" alt="Christmas 2025"> -->
                 <div class="archive-card-content">
                     <h3>Christmas Card 2025</h3>
-                    <p>Feet puns</p>
-                    <a href="christmas2025.html" class="view-card-btn">View Card</a>
+                    <div class="date">December 2025</div>
+                    <p>Feet puns. So many feet puns. Toe-tally worth it.</p>
+                    <a href="christmas2025.html" class="view-card-btn">View Card →</a>
                 </div>
             </div>
 
-            <!-- Template for future cards - you'll add more here! -->
+            <!-- Template for future cards -->
             <!-- 
             <div class="archive-card">
                 <img src="YOUR_IMAGE_URL" alt="Next Card">
                 <div class="archive-card-content">
-                    <h3>💝 Card Title</h3>
+                    <h3>💕 Card Title</h3>
                     <div class="date">Date</div>
                     <p>Description of the card/memory</p>
                     <a href="card-name.html" class="view-card-btn">View Card →</a>

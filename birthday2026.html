@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! 🎁</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #faeee7;
+            min-height: 100vh;
+            color: #594a4e;
+        }
+
+        /* Intro Screen */
+        .intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #faeee7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.8s ease;
+            padding: 20px;
+        }
+
+        .intro-screen.hidden {
+            animation: fadeOut 0.5s ease forwards;
+            pointer-events: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; }
+        }
+
+        .birthday-title {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideDown 1s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+        }
+
+        .birthday-title h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 4em;
+            color: #33272a;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        .birthday-title .age {
+            color: #ff8ba7;
+            display: block;
+            font-size: 1.2em;
+        }
+
+        .birthday-title p {
+            font-size: 1.4em;
+            color: #594a4e;
+            margin-top: 10px;
+        }
+
+        .start-button {
+            background: #ff8ba7;
+            color: #33272a;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.3em;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 15px rgba(255, 139, 167, 0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .start-button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(255, 139, 167, 0.4);
+            animation: none;
+        }
+
+        /* Game Screen */
+        .game-screen {
+            display: none;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .game-screen.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .game-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2.5em;
+            color: #33272a;
+            margin-bottom: 15px;
+        }
+
+        .game-header p {
+            font-size: 1.2em;
+            color: #594a4e;
+        }
+
+        .tokens-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tokens {
+            background: #fffffe;
+            display: inline-block;
+            padding: 15px 40px;
+            border-radius: 50px;
+            border: 3px solid #33272a;
+            font-size: 1.3em;
+            color: #33272a;
+            font-weight: 600;
+        }
+
+        .tokens-count {
+            color: #ff8ba7;
+            font-weight: 700;
+        }
+
+        /* Gift Boxes Grid */
+        .boxes-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .gift-box {
+            width: 100%;
+            aspect-ratio: 1;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-box:hover:not(.opened) {
+            transform: scale(1.1);
+        }
+
+        .gift-box.opened {
+            cursor: default;
+            opacity: 0.5;
+        }
+
+        .gift-box.revealed {
+            opacity: 0.7;
+        }
+
+        /* SVG Gift Box */
+        .box-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .box-body {
+            fill: #ff8ba7;
+            stroke: #33272a;
+            stroke-width: 3;
+        }
+
+        .box-lid {
+            fill: #ffc6c7;
+            stroke: #33272a;
+            stroke-width: 3;
+            transition: transform 0.3s ease;
+            transform-origin: center bottom;
+        }
+
+        .gift-box:hover:not(.opened) .box-lid {
+            transform: translateY(-5px);
+        }
+
+        .gift-box.opened .box-lid {
+            animation: openLid 0.5s ease forwards;
+        }
+
+        @keyframes openLid {
+            to {
+                transform: translateY(-50px) rotate(-10deg);
+                opacity: 0;
+            }
+        }
+
+        .box-ribbon {
+            fill: none;
+            stroke: #33272a;
+            stroke-width: 3;
+        }
+
+        .box-bow {
+            fill: #c3f0ca;
+            stroke: #33272a;
+            stroke-width: 2;
+        }
+
+        /* Prize Modal */
+        .prize-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(51, 39, 42, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .prize-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .prize-card {
+            background: #fffffe;
+            padding: 50px 40px;
+            border-radius: 30px;
+            border: 4px solid #33272a;
+            max-width: 500px;
+            text-align: center;
+            animation: popIn 0.5s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .prize-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2em;
+            color: #33272a;
+            margin-bottom: 25px;
+        }
+
+        .prize-card .prize-text {
+            font-size: 1.8em;
+            color: #ff8ba7;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .prize-card .prize-emoji {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .continue-button {
+            background: #ff8ba7;
+            color: #33272a;
+            border: 3px solid #33272a;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .continue-button:hover {
+            transform: scale(1.05);
+            background: #ffc6c7;
+        }
+
+        /* Results Screen */
+        .results-screen {
+            display: none;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .results-screen.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .results-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .results-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 3em;
+            color: #33272a;
+            margin-bottom: 20px;
+        }
+
+        .your-prizes {
+            background: #fffffe;
+            padding: 40px;
+            border-radius: 30px;
+            border: 4px solid #33272a;
+            margin-bottom: 40px;
+        }
+
+        .your-prizes h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2em;
+            color: #33272a;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .prize-list {
+            list-style: none;
+        }
+
+        .prize-list li {
+            background: #faeee7;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #ffc6c7;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            color: #594a4e;
+            font-weight: 500;
+        }
+
+        .missed-section {
+            margin-top: 40px;
+        }
+
+        .missed-section h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.8em;
+            color: #ff8ba7;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .missed-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .missed-prize {
+            background: #faeee7;
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px dashed #c3f0ca;
+            text-align: center;
+            font-size: 1.1em;
+            color: #594a4e;
+            opacity: 0.7;
+        }
+
+        .final-message {
+            background: #fffffe;
+            padding: 50px 40px;
+            border-radius: 30px;
+            border: 4px solid #33272a;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .final-message h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2.2em;
+            color: #33272a;
+            margin-bottom: 25px;
+        }
+
+        .final-message p {
+            font-size: 1.3em;
+            color: #594a4e;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .final-message .signature {
+            margin-top: 30px;
+            font-size: 1.4em;
+            color: #ff8ba7;
+            font-weight: 700;
+        }
+
+        .home-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: #ff8ba7;
+            color: #33272a;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 3px solid #33272a;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .home-button:hover {
+            transform: scale(1.05);
+            background: #ffc6c7;
+        }
+
+        @media (max-width: 768px) {
+            .birthday-title h1 {
+                font-size: 2.5em;
+            }
+            .game-header h2 {
+                font-size: 2em;
+            }
+            .boxes-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 15px;
+            }
+            .prize-card {
+                padding: 40px 30px;
+            }
+            .results-header h2 {
+                font-size: 2.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Intro Screen -->
+    <div class="intro-screen" id="introScreen">
+        <div class="birthday-title">
+            <h1>
+                Happy Birthday!
+                <span class="age">Level 32 Unlocked 🎮</span>
+            </h1>
+            <p>Time to play a birthday game...</p>
+        </div>
+        <button class="start-button" onclick="startGame()">Let's Play!</button>
+    </div>
+
+    <!-- Game Screen -->
+    <div class="game-screen" id="gameScreen">
+        <div class="game-header">
+            <h2>🎪 Birthday Carnival! 🎪</h2>
+            <p>Pick 3 gift boxes to reveal your prizes!</p>
+        </div>
+        
+        <div class="tokens-container">
+            <div class="tokens">
+                Tokens: <span class="tokens-count" id="tokensLeft">3</span> / 3
+            </div>
+        </div>
+
+        <div class="boxes-grid" id="boxesGrid">
+            <!-- Gift boxes will be generated here -->
+        </div>
+    </div>
+
+    <!-- Prize Modal -->
+    <div class="prize-modal" id="prizeModal">
+        <div class="prize-card">
+            <div class="prize-emoji" id="prizeEmoji">🎁</div>
+            <h3>You Won:</h3>
+            <div class="prize-text" id="prizeText"></div>
+            <button class="continue-button" onclick="closePrize()">Nice!</button>
+        </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div class="results-screen" id="resultsScreen">
+        <div class="results-container">
+            <div class="results-header">
+                <h2>Game Over! 🎉</h2>
+            </div>
+
+            <div class="your-prizes">
+                <h3>Your Prizes:</h3>
+                <ul class="prize-list" id="yourPrizesList"></ul>
+            </div>
+
+            <div class="missed-section">
+                <h4>What You Could've Won... 😅</h4>
+                <div class="missed-grid" id="missedPrizes"></div>
+            </div>
+
+            <div class="final-message">
+                <h3>Okay but seriously...</h3>
+                <p>
+                    Happy 32nd birthday to my favorite person in the entire world! 
+                    I know the prizes were rigged (lol sorry), but you're still the real winner here.
+                </p>
+                <p>
+                    Thank you for being you – for making me laugh every single day, 
+                    for all the late-night gaming sessions, for being my player 2 in this crazy game called life.
+                </p>
+                <p>
+                    Here's to another year of legendary moments, epic victories, 
+                    and respawning together no matter what. GG, birthday boy! 🎮❤️
+                </p>
+                <div class="signature">
+                    Love you endlessly,<br>
+                    Your Biggest Fan 💕
+                </div>
+                <a href="index.html" class="home-button">Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Prize pools
+        const goodPrizes = [
+            { text: "$5 Venmo Transfer", emoji: "💵" },
+            { text: "Anything off the McDonalds $1-2-3 Menu", emoji: "🍔" },
+            { text: "Free Hug Coupon", emoji: "🤗" }
+        ];
+
+        const amazingPrizes = [
+            "₿100,000 Bitcoin",
+            "RTX 5090 Ti Graphics Card",
+            "100,000g in World of Warcraft",
+            "Private Island in the Bahamas",
+            "Unlimited Taco Bell for Life",
+            "Tesla Cybertruck",
+            "Mythic Raid Carry Package",
+            "Gaming PC Worth $10,000",
+            "2-Story Luxury Guest House Near Beach",
+            "Lobster and Beef Wellington Every Day",
+            "Lifetime Supply of Energy Drinks",
+            "Professional Elden Ring Coach"
+        ];
+
+        let tokensLeft = 3;
+        let selectedPrizes = [];
+        let currentPrize = null;
+        let totalBoxes = 15;
+        let assignedPrizes = [];
+
+        function startGame() {
+            document.getElementById('introScreen').classList.add('hidden');
+            setTimeout(() => {
+                document.getElementById('gameScreen').classList.add('active');
+                generateBoxes();
+            }, 500);
+        }
+
+        function generateBoxes() {
+            const grid = document.getElementById('boxesGrid');
+            
+            // Assign prizes - first 3 are rigged to be bad
+            assignedPrizes = [...goodPrizes];
+            
+            // Fill remaining with amazing prizes
+            let remainingCount = totalBoxes - 3;
+            for (let i = 0; i < remainingCount; i++) {
+                assignedPrizes.push({
+                    text: amazingPrizes[i % amazingPrizes.length],
+                    emoji: "🎁"
+                });
+            }
+            
+            // Shuffle the array
+            assignedPrizes = assignedPrizes.sort(() => Math.random() - 0.5);
+            
+            // Create boxes
+            for (let i = 0; i < totalBoxes; i++) {
+                const box = document.createElement('div');
+                box.className = 'gift-box';
+                box.innerHTML = `
+                    <svg class="box-svg" viewBox="0 0 100 100">
+                        <!-- Box body -->
+                        <rect class="box-body" x="15" y="35" width="70" height="55" rx="5"/>
+                        
+                        <!-- Ribbon vertical -->
+                        <line class="box-ribbon" x1="50" y1="35" x2="50" y2="90"/>
+                        
+                        <!-- Ribbon horizontal -->
+                        <line class="box-ribbon" x1="15" y1="62" x2="85" y2="62"/>
+                        
+                        <!-- Lid -->
+                        <rect class="box-lid" x="10" y="25" width="80" height="15" rx="3"/>
+                        
+                        <!-- Bow -->
+                        <circle class="box-bow" cx="50" cy="25" r="8"/>
+                        <ellipse class="box-bow" cx="35" cy="25" rx="12" ry="8"/>
+                        <ellipse class="box-bow" cx="65" cy="25" rx="12" ry="8"/>
+                    </svg>
+                `;
+                box.dataset.index = i;
+                box.onclick = () => openBox(i, box);
+                grid.appendChild(box);
+            }
+        }
+
+        function openBox(index, boxElement) {
+            if (tokensLeft === 0 || boxElement.classList.contains('opened')) return;
+            
+            // Mark as opened
+            boxElement.classList.add('opened');
+            tokensLeft--;
+            document.getElementById('tokensLeft').textContent = tokensLeft;
+            
+            // Get prize - rigged logic
+            // First 3 picks always get the bad prizes
+            const pickNumber = 3 - tokensLeft;
+            currentPrize = goodPrizes[pickNumber - 1];
+            selectedPrizes.push(currentPrize);
+            
+            // Show prize modal
+            document.getElementById('prizeEmoji').textContent = currentPrize.emoji;
+            document.getElementById('prizeText').textContent = currentPrize.text;
+            document.getElementById('prizeModal').classList.add('active');
+        }
+
+        function closePrize() {
+            document.getElementById('prizeModal').classList.remove('active');
+            
+            // Check if game is over
+            if (tokensLeft === 0) {
+                setTimeout(showResults, 500);
+            }
+        }
+
+        function showResults() {
+            // Hide game, show results
+            document.getElementById('gameScreen').classList.remove('active');
+            document.getElementById('resultsScreen').classList.add('active');
+            
+            // Show won prizes
+            const list = document.getElementById('yourPrizesList');
+            selectedPrizes.forEach(prize => {
+                const li = document.createElement('li');
+                li.textContent = `${prize.emoji} ${prize.text}`;
+                list.appendChild(li);
+            });
+            
+            // Show missed prizes
+            const missedGrid = document.getElementById('missedPrizes');
+            amazingPrizes.slice(0, 12).forEach(prize => {
+                const div = document.createElement('div');
+                div.className = 'missed-prize';
+                div.textContent = prize;
+                missedGrid.appendChild(div);
+            });
+            
+            // Reveal all unopened boxes
+            const boxes = document.querySelectorAll('.gift-box:not(.opened)');
+            boxes.forEach((box, i) => {
+                setTimeout(() => {
+                    box.classList.add('revealed');
+                    box.classList.add('opened');
+                }, i * 100);
+            });
+        }
+    </script>
+</body>
+</html>

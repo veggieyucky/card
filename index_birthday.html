@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You 🎂</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #faeee7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Floating decorations */
+        .floating-decoration {
+            position: fixed;
+            font-size: 2.5em;
+            animation: float-up 8s ease-in infinite;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            background: #fffffe;
+            border-bottom: 3px solid #33272a;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        nav a {
+            color: #33272a;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            padding: 10px 25px;
+            margin: 0 10px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background: #ffc6c7;
+            transform: translateY(-2px);
+        }
+
+        nav a.active {
+            background: #ff8ba7;
+            color: #33272a;
+        }
+
+        /* Birthday Badge */
+        .birthday-badge {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: #ff8ba7;
+            color: #33272a;
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 2px solid #33272a;
+            font-size: 0.9em;
+            font-weight: 700;
+            animation: wiggle 1.5s ease infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        /* Main Content */
+        .container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .birthday-announcement {
+            background: #fffffe;
+            padding: 60px 50px;
+            border-radius: 30px;
+            border: 4px solid #33272a;
+            max-width: 650px;
+            box-shadow: 8px 8px 0px #ffc6c7;
+            text-align: center;
+            animation: popIn 1s ease;
+            position: relative;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9) rotate(-2deg);
+            }
+            50% {
+                transform: scale(1.02) rotate(1deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .birthday-announcement .emoji-burst {
+            font-size: 5em;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .birthday-announcement h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 3em;
+            color: #33272a;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .birthday-announcement .special-day {
+            color: #ff8ba7;
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .birthday-announcement p {
+            color: #594a4e;
+            font-size: 1.2em;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff8ba7;
+            color: #33272a;
+            padding: 20px 50px;
+            font-size: 1.4em;
+            font-weight: 700;
+            border-radius: 50px;
+            border: 3px solid #33272a;
+            text-decoration: none;
+            box-shadow: 5px 5px 0px #33272a;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .cta-button:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 2px 2px 0px #33272a;
+            background: #ffc6c7;
+        }
+
+        /* Confetti */
+        .confetti-piece {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            animation: confetti-fall 4s linear infinite;
+            pointer-events: none;
+            border-radius: 2px;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .birthday-announcement {
+                padding: 40px 30px;
+                box-shadow: 5px 5px 0px #ffc6c7;
+            }
+            .birthday-announcement h1 {
+                font-size: 2.2em;
+            }
+            .birthday-announcement .emoji-burst {
+                font-size: 3.5em;
+            }
+            .birthday-announcement p {
+                font-size: 1.1em;
+            }
+            .cta-button {
+                font-size: 1.2em;
+                padding: 18px 40px;
+            }
+            nav a {
+                font-size: 1em;
+                padding: 8px 15px;
+                margin: 5px;
+            }
+            .birthday-badge {
+                position: static;
+                display: inline-block;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="archive.html">Archive</a>
+        <div class="birthday-badge">Birthday Edition Update!</div>
+    </nav>
+
+    <div class="container">
+        <div class="birthday-announcement">
+            <div class="emoji-burst">🎂</div>
+            <h1>Happy Birthday Bibby! &lt;3</h1>
+            <p class="special-day">Today is YOUR special day! 🎉</p>
+            <p>
+                I made you something extra special this year. 
+                Get ready for a little birthday carnival game just for you...
+            </p>
+            <a href="birthday2026_carnival.html" class="cta-button">
+                Start Birthday Game! 🎁
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Create floating decorations
+        function createFloatingItem() {
+            const item = document.createElement('div');
+            item.className = 'floating-decoration';
+            const items = ['🎮', '🎁', '🎉', '🎊', '✨', '🎈'];
+            item.textContent = items[Math.floor(Math.random() * items.length)];
+            item.style.left = Math.random() * 100 + '%';
+            item.style.animationDelay = Math.random() * 5 + 's';
+            item.style.animationDuration = (Math.random() * 3 + 6) + 's';
+            document.body.appendChild(item);
+            
+            setTimeout(() => item.remove(), 10000);
+        }
+
+        // Create confetti
+        function createConfetti() {
+            const colors = ['#ff8ba7', '#ffc6c7', '#c3f0ca', '#33272a'];
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti-piece';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    confetti.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 7000);
+                }, i * 150);
+            }
+        }
+
+        // Spawn items periodically
+        setInterval(createFloatingItem, 3000);
+        createFloatingItem();
+
+        // Initial confetti burst
+        createConfetti();
+        
+        // More confetti every 12 seconds
+        setInterval(createConfetti, 12000);
+    </script>
+</body>
+</html>
